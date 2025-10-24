@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>校园答疑助手 - 教师中心</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4361ee',
+            teacher: '#7209b7',
+            teacherLight: '#f3e8ff',
+            success: '#4cc9f0',
+            warning: '#f72585',
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .nav-shadow {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      }
+      .card-hover {
+        @apply transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+      }
+      .menu-item {
+        @apply flex items-center justify-between py-3 px-4 rounded-lg hover:bg-teacher/5 transition-all;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- 顶部导航栏 -->
+  <nav class="bg-white nav-shadow sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <button class="text-gray-500 hover:text-teacher transition-colors p-2 rounded-full hover:bg-gray-100">
+        <i class="fa fa-arrow-left text-lg"></i>
+      </button>
+      <h1 class="text-lg font-bold text-gray-800">教师中心</h1>
+      <button class="text-gray-500 hover:text-teacher transition-colors p-2 rounded-full hover:bg-gray-100">
+        <i class="fa fa-cog text-lg"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="flex-1 container mx-auto px-4 py-6">
+    <!-- 个人信息卡片 -->
+    <div class="bg-gradient-to-r from-teacher to-purple-800 rounded-2xl p-6 text-white mb-6 relative overflow-hidden">
+      <!-- 背景装饰 -->
+      <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"></div>
+      <div class="absolute bottom-0 left-10 w-20 h-20 bg-white/10 rounded-full -mb-10"></div>
+      
+      <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-6">
+        <div class="relative">
+          <img src="https://picsum.photos/id/1005/200" alt="教师头像" class="w-24 h-24 rounded-full border-4 border-white/30 object-cover">
+          <button class="absolute bottom-0 right-0 w-8 h-8 bg-white rounded-full flex items-center justify-center text-teacher shadow-md hover:bg-gray-50 transition-colors">
+            <i class="fa fa-camera text-sm"></i>
+          </button>
+        </div>
+        
+        <div class="text-center md:text-left flex-1">
+          <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+            <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">张教授</h2>
+            <span class="bg-white/20 text-white text-xs px-2.5 py-0.5 rounded-full">数学与统计学院</span>
+          </div>
+          <p class="mt-1 opacity-90">工号：201000123 | 职称：副教授</p>
+          
+          <!-- 快捷操作按钮 -->
+          <div class="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-3">
+            <button class="bg-white/20 hover:bg-white/30 text-white px-4 py-1.5 rounded-lg text-sm transition-colors flex items-center">
+              <i class="fa fa-user-o mr-1.5"></i> 编辑资料
+            </button>
+            <button class="bg-white text-teacher hover:bg-gray-100 px-4 py-1.5 rounded-lg text-sm transition-colors flex items-center">
+              <i class="fa fa-bar-chart mr-1.5"></i> 教学统计
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 数据统计卡片 -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm card-hover">
+        <div class="text-2xl font-bold text-teacher">86</div>
+        <div class="text-xs text-gray-500 mt-1">本周解答</div>
+      </div>
+      <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm card-hover">
+        <div class="text-2xl font-bold text-teacher">5</div>
+        <div class="text-xs text-gray-500 mt-1">教授课程</div>
+      </div>
+      <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm card-hover">
+        <div class="text-2xl font-bold text-teacher">142</div>
+        <div class="text-xs text-gray-500 mt-1">学生数量</div>
+      </div>
+      <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm card-hover">
+        <div class="text-2xl font-bold text-teacher">4.9</div>
+        <div class="text-xs text-gray-500 mt-1">满意度评分</div>
+      </div>
+    </div>
+
+    <!-- 教学数据 -->
+    <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm mb-6">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <h3 class="font-bold text-gray-800">答疑数据统计</h3>
+        <div class="flex items-center gap-2">
+          <button class="px-3 py-1 text-sm rounded-full bg-teacher text-white">本月</button>
+          <button class="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">本学期</button>
+          <button class="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">全年</button>
+        </div>
+      </div>
+      <div class="h-48">
+        <canvas id="teachingChart"></canvas>
+      </div>
+    </div>
+
+    <!-- 功能菜单 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <!-- 教学管理 -->
+      <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        <h3 class="px-5 py-4 border-b border-gray-100 font-bold text-gray-800">教学管理</h3>
+        <div class="p-2">
+          <div class="menu-item">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-teacher/10 flex items-center justify-center text-teacher mr-3">
+                <i class="fa fa-book"></i>
+              </div>
+              <span class="font-medium">我的课程</span>
+            </div>
+            <i class="fa fa-angle-right text-gray-400"></i>
+          </div>
+          <div class="menu-item">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-teacher/10 flex items-center justify-center text-teacher mr-3">
+                <i class="fa fa-users"></i>
+              </div>
+              <span class="font-medium">学生管理</span>
+            </div>
+            <i class="fa fa-angle-right text-gray-400"></i>
+          </div>
+          <div class="menu-item">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-teacher/10 flex items-center justify-center text-teacher mr-3">
+                <i class="fa fa-question-circle"></i>
+              </div>
+              <span class="font-medium">答疑管理</span>
+            </div>
+            <span class="ml-auto bg-warning text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">8</span>
+          </div>
+          <div class="menu-item">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-teacher/10 flex items-center justify-center text-teacher mr-3">
+                <i class="fa fa-file-text-o"></i>
+              </div>
+              <span class="font-medium">教学资料</span>
+            </div>
+            <i class="fa fa-angle-right text-gray-400"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- 系统功能 -->
+      <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        <h3 class="px-5 py-4 border-b border-gray-100 font-bold text-gray-800">系统功能</h3>
+        <div class="p-2">
+          <div class="menu-item">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-teacher/10 flex items-center justify-center text-teacher mr-3">
+                <i class="fa fa-bar-chart"></i>
+              </div>
+              <span class="font-medium">教学分析</span>
+            </div>
+            <i class="fa fa-angle-right text-gray-400"></i>
+          </div>
+          <div class="menu-item">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-teacher/10 flex items-center justify-center text-teacher mr-3">
+                <i class="fa fa-cog"></i>
+              </div>
+              <span class="font-medium">系统设置</span>
+            </div>
+            <i class="fa fa-angle-right text-gray-400"></i>
+          </div>
+          <div class="menu-item">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-teacher/10 flex items-center justify-center text-teacher mr-3">
+                <i class="fa fa-bell-o"></i>
+              </div>
+              <span class="font-medium">消息通知</span>
+            </div>
+            <span class="ml-auto bg-warning text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">5</span>
+          </div>
+          <div class="menu-item">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-teacher/10 flex items-center justify-center text-teacher mr-3">
+                <i class="fa fa-question-circle-o"></i>
+              </div>
+              <span class="font-medium">帮助中心</span>
+            </div>
+            <i class="fa fa-angle-right text-gray-400"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 教授课程 -->
+    <div class="bg-white rounded-xl border border-gray-100 shadow-sm">
+      <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="font-bold text-gray-800">教授课程</h3>
+        <a href="#" class="text-teacher text-sm hover:text-teacher/80 transition-colors">管理课程</a>
+      </div>
+      
+      <div class="divide-y divide-gray-100">
+        <div class="p-4 hover:bg-teacher/5 transition-colors">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-teacher/10 flex items-center justify-center text-teacher">
+                <i class="fa fa-calculator"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800">高等数学（上）</h4>
+                <p class="text-xs text-gray-500">计算机系、电子系 | 120名学生</p>
+              </div>
+            </div>
+            <span class="text-xs bg-warning/10 text-warning px-2 py-0.5 rounded-full">8个待解答</span>
+          </div>
+        </div>
+        
+        <div class="p-4 hover:bg-teacher/5 transition-colors">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-teacher/10 flex items-center justify-center text-teacher">
+                <i class="fa fa-superscript"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800">线性代数</h4>
+                <p class="text-xs text-gray-500">计算机系、自动化系 | 98名学生</p>
+              </div>
+            </div>
+            <span class="text-xs bg-warning/10 text-warning px-2 py-0.5 rounded-full">4个待解答</span>
+          </div>
+        </div>
+        
+        <div class="p-4 hover:bg-teacher/5 transition-colors">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-teacher/10 flex items-center justify-center text-teacher">
+                <i class="fa fa-complex"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800">复变函数与积分变换</h4>
+                <p class="text-xs text-gray-500">电子系、自动化系 | 86名学生</p>
+              </div>
+            </div>
+            <span class="text-xs bg-success/10 text-success px-2 py-0.5 rounded-full">0个待解答</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 底部导航（移动端） -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2 px-6 flex justify-around">
+    <a href="#" class="flex flex-col items-center text-gray-500">
+      <i class="fa fa-home text-lg"></i>
+      <span class="text-xs mt-1">首页</span>
+    </a>
+    <a href="#" class="flex flex-col items-center text-gray-500">
+      <i class="fa fa-question-circle text-lg"></i>
+      <span class="text-xs mt-1">答疑</span>
+    </a>
+    <a href="#" class="flex flex-col items-center text-gray-500">
+      <i class="fa fa-users text-lg"></i>
+      <span class="text-xs mt-1">学生</span>
+    </a>
+    <a href="#" class="flex flex-col items-center text-teacher">
+      <i class="fa fa-user text-lg"></i>
+      <span class="text-xs mt-1">我的</span>
+    </a>
+  </div>
+
+<script type="module" src="/src/teacher/profile.js"></script>
+</body>
+</html>

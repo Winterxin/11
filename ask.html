@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>校园答疑助手 - 提问</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4361ee',
+            secondary: '#3f37c9',
+            accent: '#4895ef',
+            light: '#f8f9fa',
+            dark: '#212529'
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .nav-shadow {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      }
+      .input-focus {
+        @apply focus:ring-2 focus:ring-primary/50 focus:border-primary focus:outline-none;
+      }
+      .form-label {
+        @apply block text-gray-700 font-medium mb-2 text-sm;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- 顶部导航栏 -->
+  <nav class="bg-white nav-shadow sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <button class="text-gray-500 hover:text-primary transition-colors">
+        <i class="fa fa-arrow-left text-lg"></i>
+      </button>
+      <h1 class="text-lg font-bold text-dark">我要提问</h1>
+      <button class="text-gray-500 hover:text-primary transition-colors">
+        <i class="fa fa-question-circle text-lg"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="flex-1 container mx-auto px-4 py-6">
+    <form class="space-y-6">
+      <!-- 问题标题 -->
+      <div>
+        <label for="title" class="form-label">问题标题</label>
+        <input type="text" id="title" placeholder="请简要描述你的问题（如：这道积分题的步骤卡壳了）" 
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all">
+        <p class="text-xs text-gray-500 mt-1">请清晰描述问题，帮助更快得到解答</p>
+      </div>
+
+      <!-- 所属课程 -->
+      <div>
+        <label class="form-label">所属课程</label>
+        <div class="relative">
+          <select class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all appearance-none bg-white">
+            <option>高等数学（上）</option>
+            <option>大学物理</option>
+            <option>程序设计基础</option>
+            <option>线性代数</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-gray-500">
+            <i class="fa fa-chevron-down text-sm"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- 问题详情 -->
+      <div>
+        <label for="content" class="form-label">问题详情</label>
+        <textarea id="content" rows="6" placeholder="请详细描述你的问题，包括你的思路和遇到的困难..." 
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all resize-none"></textarea>
+        <div class="flex justify-between items-center mt-1">
+          <p class="text-xs text-gray-500">请尽量详细描述，可提高解答效率</p>
+          <p class="text-xs text-gray-500">0/500</p>
+        </div>
+      </div>
+
+      <!-- 附加内容 -->
+      <div>
+        <label class="form-label">附加内容（可选）</label>
+        
+        <!-- 图片上传 -->
+        <div class="mb-4">
+          <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary/50 transition-colors cursor-pointer">
+            <i class="fa fa-upload text-2xl text-gray-400 mb-2"></i>
+            <p class="text-gray-500 text-sm">点击上传图片（如作业截图、公式推导过程）</p>
+            <p class="text-gray-400 text-xs mt-1">支持JPG、PNG格式，最多3张</p>
+          </div>
+          
+          <!-- 已上传图片预览（隐藏状态） -->
+          <div class="flex gap-2 mt-3 hidden">
+            <div class="relative w-20 h-20 rounded-lg overflow-hidden border border-gray-200">
+              <img src="https://picsum.photos/id/180/200" alt="上传的图片" class="w-full h-full object-cover">
+              <button class="absolute top-1 right-1 w-6 h-6 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors">
+                <i class="fa fa-times text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 公式工具 -->
+        <div>
+          <button type="button" class="flex items-center text-primary hover:text-secondary transition-colors text-sm">
+            <i class="fa fa-calculator mr-1"></i>
+            <span>插入公式</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 提问设置 -->
+      <div class="bg-white rounded-xl p-4 border border-gray-100">
+        <h3 class="font-medium text-dark mb-3">提问设置</h3>
+        
+        <div class="flex items-center justify-between mb-3">
+          <label class="flex items-center text-gray-700">
+            <i class="fa fa-user-secret mr-2 text-gray-500"></i>
+            <span>匿名提问</span>
+          </label>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </label>
+        </div>
+        
+        <div class="flex items-center justify-between">
+          <label class="flex items-center text-gray-700">
+            <i class="fa fa-users mr-2 text-gray-500"></i>
+            <span>允许同学回答</span>
+          </label>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" checked class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 提交按钮 -->
+      <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:translate-y-[-2px] flex items-center justify-center mt-4">
+        <span>提交问题</span>
+        <i class="fa fa-paper-plane ml-2"></i>
+      </button>
+    </form>
+  </main>
+</body>
+</html>

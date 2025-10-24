@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>校园答疑助手 - 个人中心</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4361ee',
+            secondary: '#3f37c9',
+            accent: '#4895ef',
+            success: '#38b000',
+            warning: '#f72585',
+            dark: '#1e293b'
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .card-hover {
+        @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+      }
+      .feature-icon {
+        @apply w-12 h-12 rounded-xl flex items-center justify-center text-primary bg-primary/10;
+      }
+      .stat-value {
+        @apply text-[clamp(1.5rem,3vw,2rem)] font-bold text-primary;
+      }
+      .progress-ring {
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- 顶部导航 -->
+  <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <button class="p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <h1 class="text-xl font-bold text-dark">个人中心</h1>
+      <button class="p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors">
+        <i class="fa fa-ellipsis-v"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="flex-1 container mx-auto px-4 py-6">
+    <!-- 个人信息头部 -->
+    <section class="relative rounded-2xl overflow-hidden mb-6">
+      <!-- 背景图 -->
+      <div class="h-40 bg-gradient-to-r from-primary to-secondary relative">
+        <div class="absolute inset-0 bg-[url('https://picsum.photos/id/1048/800/400')] bg-cover bg-center opacity-20"></div>
+      </div>
+      
+      <!-- 个人信息卡片 -->
+      <div class="px-6 -mt-16 bg-white rounded-2xl shadow-md p-6 card-hover">
+        <div class="flex flex-col md:flex-row items-start gap-6">
+          <!-- 头像与基本信息 -->
+          <div class="flex items-start gap-4 w-full md:w-auto">
+            <div class="relative">
+              <img src="https://picsum.photos/id/64/200" alt="用户头像" class="w-24 h-24 rounded-xl border-4 border-white object-cover shadow-sm">
+              <button class="absolute bottom-0 right-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white shadow-md hover:bg-secondary transition-colors">
+                <i class="fa fa-camera text-sm"></i>
+              </button>
+            </div>
+            
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2">
+                <h2 class="text-2xl font-bold text-dark truncate">张同学</h2>
+                <span class="bg-primary/10 text-primary text-xs px-2.5 py-0.5 rounded-full">计算机科学与技术</span>
+              </div>
+              <p class="text-gray-500 mt-1 truncate">大三 | 学号: 20210012345</p>
+              
+              <!-- 信誉分 -->
+              <div class="flex items-center gap-2 mt-3">
+                <div class="relative w-12 h-12">
+                  <svg class="w-full h-full progress-ring">
+                    <circle cx="24" cy="24" r="20" fill="none" stroke="#f1f5f9" stroke-width="3"/>
+                    <circle cx="24" cy="24" r="20" fill="none" stroke="#4361ee" stroke-width="3" stroke-dasharray="125.6" stroke-dashoffset="12.56"/>
+                  </svg>
+                  <div class="absolute inset-0 flex items-center justify-center text-sm font-bold text-primary">90</div>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-dark">信誉分</p>
+                  <p class="text-xs text-gray-500">优秀 · 258积分</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 快捷操作 -->
+          <div class="flex flex-wrap gap-3 justify-center md:justify-end w-full md:w-auto mt-4 md:mt-0">
+            <button class="bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-medium flex items-center gap-2 hover:bg-secondary transition-colors">
+              <i class="fa fa-edit"></i> 编辑资料
+            </button>
+            <button class="bg-white border border-gray-200 text-gray-700 px-5 py-2.5 rounded-xl text-sm font-medium flex items-center gap-2 hover:border-primary/30 transition-colors">
+              <i class="fa fa-cog"></i> 设置
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 数据概览 -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-xl p-5 shadow-sm card-hover">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+            <i class="fa fa-question-circle"></i>
+          </div>
+          <span class="text-xs text-gray-500">提问</span>
+        </div>
+        <div class="stat-value">12</div>
+        <p class="text-xs text-success flex items-center mt-1">
+          <i class="fa fa-arrow-up mr-1"></i> 较上周 +2
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-xl p-5 shadow-sm card-hover">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+            <i class="fa fa-comment"></i>
+          </div>
+          <span class="text-xs text-gray-500">回答</span>
+        </div>
+        <div class="stat-value">8</div>
+        <p class="text-xs text-gray-500 flex items-center mt-1">
+          <i class="fa fa-minus mr-1"></i> 与上周持平
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-xl p-5 shadow-sm card-hover">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+            <i class="fa fa-thumbs-up"></i>
+          </div>
+          <span class="text-xs text-gray-500">获赞</span>
+        </div>
+        <div class="stat-value">42</div>
+        <p class="text-xs text-success flex items-center mt-1">
+          <i class="fa fa-arrow-up mr-1"></i> 较上周 +8
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-xl p-5 shadow-sm card-hover">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+            <i class="fa fa-star"></i>
+          </div>
+          <span class="text-xs text-gray-500">收藏</span>
+        </div>
+        <div class="stat-value">15</div>
+        <p class="text-xs text-danger flex items-center mt-1">
+          <i class="fa fa-arrow-down mr-1"></i> 较上周 -1
+        </p>
+      </div>
+    </section>
+
+    <!-- 学习数据与成就 -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <!-- 学习数据图表 -->
+      <div class="bg-white rounded-xl p-5 shadow-sm lg:col-span-2 card-hover">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+          <h3 class="text-lg font-bold text-dark">学习活跃度</h3>
+          <div class="flex items-center gap-2">
+            <button class="px-3 py-1 text-sm rounded-full bg-primary text-white">本周</button>
+            <button class="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">本月</button>
+            <button class="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">学期</button>
+          </div>
+        </div>
+        <div class="h-64">
+          <canvas id="activityChart"></canvas>
+        </div>
+      </div>
+      
+      <!-- 本周成就 -->
+      <div class="bg-white rounded-xl p-5 shadow-sm card-hover">
+        <h3 class="text-lg font-bold text-dark mb-5">本周成就</h3>
+        
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-success/10 flex items-center justify-center text-success">
+              <i class="fa fa-fire"></i>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-medium text-dark">连续提问3天</h4>
+              <div class="w-full bg-gray-100 rounded-full h-1.5 mt-1">
+                <div class="bg-success h-1.5 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+            <span class="text-success font-medium">+15</span>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-warning/10 flex items-center justify-center text-warning">
+              <i class="fa fa-trophy"></i>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-medium text-dark">最佳回答1次</h4>
+              <div class="w-full bg-gray-100 rounded-full h-1.5 mt-1">
+                <div class="bg-warning h-1.5 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+            <span class="text-warning font-medium">+30</span>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+              <i class="fa fa-comments"></i>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-medium text-dark">回答5个问题</h4>
+              <div class="w-full bg-gray-100 rounded-full h-1.5 mt-1">
+                <div class="bg-primary h-1.5 rounded-full" style="width: 60%"></div>
+              </div>
+            </div>
+            <span class="text-gray-400 font-medium">3/5</span>
+          </div>
+        </div>
+        
+        <button class="w-full mt-5 text-primary text-sm font-medium hover:text-secondary transition-colors">
+          查看全部成就 <i class="fa fa-angle-right ml-1"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- 功能导航 -->
+    <section class="bg-white rounded-xl shadow-sm overflow-hidden mb-6 card-hover">
+      <h3 class="px-5 py-4 border-b border-gray-100 font-bold text-dark">功能导航</h3>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-1">
+        <a href="#" class="flex flex-col items-center justify-center p-5 hover:bg-gray-50 transition-colors">
+          <div class="feature-icon mb-3">
+            <i class="fa fa-question-circle"></i>
+          </div>
+          <span class="text-sm font-medium text-dark">我的提问</span>
+        </a>
+        
+        <a href="#" class="flex flex-col items-center justify-center p-5 hover:bg-gray-50 transition-colors">
+          <div class="feature-icon mb-3">
+            <i class="fa fa-comment"></i>
+          </div>
+          <span class="text-sm font-medium text-dark">我的回答</span>
+        </a>
+        
+        <a href="#" class="flex flex-col items-center justify-center p-5 hover:bg-gray-50 transition-colors">
+          <div class="feature-icon mb-3">
+            <i class="fa fa-star"></i>
+          </div>
+          <span class="text-sm font-medium text-dark">我的收藏</span>
+        </a>
+        
+        <a href="#" class="flex flex-col items-center justify-center p-5 hover:bg-gray-50 transition-colors">
+          <div class="feature-icon mb-3">
+            <i class="fa fa-book"></i>
+          </div>
+          <span class="text-sm font-medium text-dark">错题本</span>
+        </a>
+        
+        <a href="#" class="flex flex-col items-center justify-center p-5 hover:bg-gray-50 transition-colors">
+          <div class="feature-icon mb-3">
+            <i class="fa fa-robot"></i>
+          </div>
+          <span class="text-sm font-medium text-dark">AI助手</span>
+        </a>
+        
+        <a href="#" class="flex flex-col items-center justify-center p-5 hover:bg-gray-50 transition-colors">
+          <div class="feature-icon mb-3">
+            <i class="fa fa-bar-chart"></i>
+          </div>
+          <span class="text-sm font-medium text-dark">学习报告</span>
+        </a>
+        
+        <a href="#" class="flex flex-col items-center justify-center p-5 hover:bg-gray-50 transition-colors">
+          <div class="feature-icon mb-3 relative">
+            <i class="fa fa-bell"></i>
+            <span class="absolute -top-1 -right-1 w-5 h-5 bg-warning rounded-full text-white text-xs flex items-center justify-center">3</span>
+          </div>
+          <span class="text-sm font-medium text-dark">消息通知</span>
+        </a>
+        
+        <a href="#" class="flex flex-col items-center justify-center p-5 hover:bg-gray-50 transition-colors">
+          <div class="feature-icon mb-3">
+            <i class="fa fa-graduation-cap"></i>
+          </div>
+          <span class="text-sm font-medium text-dark">我的课程</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 最近学习 -->
+    <section class="bg-white rounded-xl shadow-sm overflow-hidden card-hover">
+      <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+        <h3 class="font-bold text-dark">最近学习</h3>
+        <a href="#" class="text-primary text-sm hover:text-secondary transition-colors">查看全部</a>
+      </div>
+      
+      <div class="divide-y divide-gray-100">
+        <div class="p-5 hover:bg-gray-50 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+              <i class="fa fa-calculator text-2xl"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h4 class="font-medium text-dark">高等数学（上）</h4>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">8个问题</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-4 mt-2 text-sm text-gray-500">
+                <span><i class="fa fa-clock-o mr-1"></i> 最近：2小时前</span>
+                <span><i class="fa fa-check-circle mr-1 text-success"></i> 6个已解决</span>
+                <span><i class="fa fa-line-chart mr-1"></i> 掌握度：75%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="p-5 hover:bg-gray-50 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+              <i class="fa fa-code text-2xl"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h4 class="font-medium text-dark">程序设计基础</h4>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">5个问题</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-4 mt-2 text-sm text-gray-500">
+                <span><i class="fa fa-clock-o mr-1"></i> 最近：1天前</span>
+                <span><i class="fa fa-check-circle mr-1 text-success"></i> 5个已解决</span>
+                <span><i class="fa fa-line-chart mr-1"></i> 掌握度：90%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="p-5 hover:bg-gray-50 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+              <i class="fa fa-flask text-2xl"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h4 class="font-medium text-dark">大学物理</h4>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">3个问题</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-4 mt-2 text-sm text-gray-500">
+                <span><i class="fa fa-clock-o mr-1"></i> 最近：3天前</span>
+                <span><i class="fa fa-check-circle mr-1 text-success"></i> 2个已解决</span>
+                <span><i class="fa fa-line-chart mr-1"></i> 掌握度：60%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部导航 -->
+  <footer class="md:hidden bg-white border-t border-gray-200 py-2 px-4 fixed bottom-0 left-0 right-0 z-40">
+    <div class="flex items-center justify-around">
+      <a href="#" class="flex flex-col items-center py-1 px-3 text-gray-500 hover:text-primary transition-colors">
+        <i class="fa fa-home text-xl"></i>
+        <span class="text-xs mt-1">首页</span>
+      </a>
+      <a href="#" class="flex flex-col items-center py-1 px-3 text-gray-500 hover:text-primary transition-colors">
+        <i class="fa fa-book text-xl"></i>
+        <span class="text-xs mt-1">课程</span>
+      </a>
+      <a href="#" class="flex flex-col items-center py-1 px-3 text-gray-500 hover:text-primary transition-colors">
+        <i class="fa fa-bell text-xl"></i>
+        <span class="text-xs mt-1">通知</span>
+      </a>
+      <a href="#" class="flex flex-col items-center py-1 px-3 text-primary">
+        <i class="fa fa-user text-xl"></i>
+        <span class="text-xs mt-1">我的</span>
+      </a>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/profile.js"></script>
+</body>
+</html>

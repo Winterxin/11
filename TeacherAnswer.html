@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>校园答疑助手 - 问题解答</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4361ee',
+            teacher: '#7209b7',
+            teacherLight: '#f3e8ff',
+            success: '#4cc9f0',
+            warning: '#f72585',
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .nav-shadow {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      }
+      .reply-card {
+        @apply bg-white rounded-xl p-4 border border-gray-100 transition-all duration-300;
+      }
+      .teacher-tag {
+        @apply absolute -top-1 -right-1 bg-teacher text-white text-xs px-1.5 py-0.5 rounded;
+      }
+      .input-focus {
+        @apply focus:ring-2 focus:ring-teacher/50 focus:border-teacher focus:outline-none;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- 顶部导航栏 -->
+  <nav class="bg-white nav-shadow sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <button class="text-gray-500 hover:text-teacher transition-colors">
+        <i class="fa fa-arrow-left text-lg"></i>
+      </button>
+      <h1 class="text-lg font-bold text-gray-800">解答问题</h1>
+      <div class="flex items-center gap-3">
+        <button class="text-gray-500 hover:text-teacher transition-colors">
+          <i class="fa fa-flag-o text-lg"></i>
+        </button>
+        <button class="text-gray-500 hover:text-teacher transition-colors">
+          <i class="fa fa-share-alt text-lg"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="flex-1 container mx-auto px-4 py-6">
+    <!-- 问题卡片 -->
+    <div class="bg-white rounded-xl p-6 mb-6 border border-gray-100 shadow-sm">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-3">
+          <img src="https://picsum.photos/id/237/200" alt="学生头像" class="w-10 h-10 rounded-full">
+          <div>
+            <div class="flex items-center">
+              <h3 class="font-medium text-gray-800">李同学</h3>
+              <span class="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">计算机系 · 大一</span>
+            </div>
+            <p class="text-xs text-gray-500">2小时前 · 高等数学（上）</p>
+          </div>
+        </div>
+        <span class="px-2 py-1 bg-warning/10 text-warning text-xs rounded-full">高优先级</span>
+      </div>
+      
+      <div class="mt-4">
+        <h2 class="text-lg font-medium text-gray-800">关于洛必达法则的应用条件，这里为什么不能直接使用？</h2>
+        <p class="text-gray-600 mt-3">
+          这道题是求极限的题目，当x趋近于0时，分子分母都是0，我用了洛必达法则计算，但结果和标准答案不一样，想知道哪里出错了？<br><br>
+          我的计算步骤：<br>
+          1. 原式为0/0型，应用洛必达法则<br>
+          2. 分子分母分别求导后得到xxx<br>
+          3. 再次代入x=0，得到结果为1<br>
+          但标准答案是2，不知道哪里有问题？
+        </p>
+        <div class="mt-4 flex gap-3">
+          <img src="https://picsum.photos/id/180/400" alt="问题图片" class="w-1/2 rounded-lg object-cover border border-gray-100">
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs bg-teacher/10 text-teacher px-2 py-0.5 rounded-full">洛必达法则</span>
+          <span class="text-xs bg-teacher/10 text-teacher px-2 py-0.5 rounded-full">极限计算</span>
+          <span class="text-xs bg-teacher/10 text-teacher px-2 py-0.5 rounded-full">高数上册</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 学生讨论区 -->
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-gray-800 flex items-center">
+          <i class="fa fa-comments-o text-teacher mr-2"></i>
+          学生讨论 (3)
+        </h3>
+        <button class="text-sm text-gray-500 hover:text-teacher">
+          全部展开
+        </button>
+      </div>
+
+      <div class="space-y-4">
+        <!-- 学生回复1 -->
+        <div class="reply-card">
+          <div class="flex items-start">
+            <img src="https://picsum.photos/id/1025/200" alt="学生头像" class="w-10 h-10 rounded-full">
+            <div class="ml-3 flex-1">
+              <div class="flex items-center">
+                <h4 class="font-medium text-gray-800">陈同学</h4>
+                <p class="text-xs text-gray-500 ml-2">1小时前</p>
+              </div>
+              <div class="mt-2 text-gray-600">
+                <p>我之前也犯过类似的错误！这道题应该先用等价无穷小替换sinx≈x，然后再用洛必达法则，步骤会简单很多，你可以试试～</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 提问者回复 -->
+        <div class="reply-card bg-teacher/5 border-teacher/10">
+          <div class="flex items-start">
+            <img src="https://picsum.photos/id/237/200" alt="用户头像" class="w-10 h-10 rounded-full">
+            <div class="ml-3 flex-1">
+              <div class="flex items-center">
+                <h4 class="font-medium text-gray-800">李同学（提问者）</h4>
+                <p class="text-xs text-gray-500 ml-2">40分钟前</p>
+              </div>
+              <div class="mt-2 text-gray-600">
+                <p>谢谢！我试了一下还是不对，可能哪里还有问题，希望老师能帮忙解答。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 教师解答区 -->
+    <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm mb-6">
+      <h3 class="font-bold text-gray-800 mb-4">我的解答</h3>
+      
+      <div class="mb-4">
+        <textarea placeholder="请输入你的解答..." rows="8" 
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all resize-none"></textarea>
+      </div>
+      
+      <div class="flex items-center gap-4 mb-4">
+        <button class="text-gray-500 hover:text-teacher transition-colors flex items-center gap-1">
+          <i class="fa fa-image"></i>
+          <span>上传图片</span>
+        </button>
+        <button class="text-gray-500 hover:text-teacher transition-colors flex items-center gap-1">
+          <i class="fa fa-calculator"></i>
+          <span>插入公式</span>
+        </button>
+        <button class="text-gray-500 hover:text-teacher transition-colors flex items-center gap-1">
+          <i class="fa fa-file-text-o"></i>
+          <span>插入附件</span>
+        </button>
+      </div>
+      
+      <div class="bg-teacherLight p-3 rounded-lg flex items-start gap-3">
+        <i class="fa fa-lightbulb-o text-teacher mt-0.5"></i>
+        <p class="text-sm text-gray-700">
+          解答将同步发送给提问学生，并在课程问答区展示。可使用公式编辑器插入数学公式，使解答更清晰。
+        </p>
+      </div>
+    </div>
+
+    <!-- 解答设置 -->
+    <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm mb-20">
+      <h3 class="font-bold text-gray-800 mb-4">解答设置</h3>
+      
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <label class="flex items-center text-gray-700">
+            <i class="fa fa-bell-o mr-2 text-gray-500"></i>
+            <span>通知提问学生</span>
+          </label>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" checked class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-teacher/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-teacher"></div>
+          </label>
+        </div>
+        
+        <div class="flex items-center justify-between">
+          <label class="flex items-center text-gray-700">
+            <i class="fa fa-users mr-2 text-gray-500"></i>
+            <span>分享给同班级学生</span>
+          </label>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" checked class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-teacher/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-teacher"></div>
+          </label>
+        </div>
+        
+        <div class="flex items-center justify-between">
+          <label class="flex items-center text-gray-700">
+            <i class="fa fa-star-o mr-2 text-gray-500"></i>
+            <span>标记为典型例题</span>
+          </label>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-teacher/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-teacher"></div>
+          </label>
+        </div>
+      </div>
+      
+      <div class="mt-6 flex items-center gap-3">
+        <button class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-all">
+          保存为草稿
+        </button>
+        <button class="flex-1 px-6 py-3 bg-teacher hover:bg-teacher/90 text-white rounded-lg font-medium transition-all">
+          发布解答
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 底部导航（移动端） -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2 px-6 flex justify-around">
+    <a href="#" class="flex flex-col items-center text-teacher">
+      <i class="fa fa-home text-lg"></i>
+      <span class="text-xs mt-1">首页</span>
+    </a>
+    <a href="#" class="flex flex-col items-center text-gray-500">
+      <i class="fa fa-question-circle text-lg"></i>
+      <span class="text-xs mt-1">答疑</span>
+    </a>
+    <a href="#" class="flex flex-col items-center text-gray-500">
+      <i class="fa fa-users text-lg"></i>
+      <span class="text-xs mt-1">学生</span>
+    </a>
+    <a href="#" class="flex flex-col items-center text-gray-500">
+      <i class="fa fa-user text-lg"></i>
+      <span class="text-xs mt-1">我的</span>
+    </a>
+  </div>
+</body>
+</html>
