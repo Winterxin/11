@@ -61,17 +61,20 @@
       </div>
 
       <!-- 用户区域 -->
-      <div class="flex items-center gap-4">
-        <button class="relative text-gray-500 hover:text-primary transition-colors">
-          <i class="fa fa-bell text-lg"></i>
-          <span class="absolute -top-1 -right-1 w-4 h-4 bg-warning rounded-full text-white text-xs flex items-center justify-center">3</span>
-        </button>
-        <div class="flex items-center gap-2">
-          <img src="https://picsum.photos/id/64/200" alt="用户头像" class="w-8 h-8 rounded-full object-cover border-2 border-primary/20">
-          <span class="hidden md:inline text-sm font-medium">张同学</span>
-        </div>
-      </div>
-    </div>
+     <div class="flex items-center gap-4">
+  <button class="relative text-gray-500 hover:text-primary transition-colors" type="button" aria-label="通知">
+    <i class="fa fa-bell text-lg"></i>
+    <span class="absolute -top-1 -right-1 w-4 h-4 bg-warning rounded-full text-white text-xs flex items-center justify-center">3</span>
+  </button>
+
+  <!-- 可点击进入个人中心 -->
+<!-- 头像区域（外层可点） -->
+<button id="avatarBtn" type="button" class="flex items-center gap-2 hover:opacity-90 transition">
+  <img src="https://picsum.photos/id/64/200" class="w-8 h-8 rounded-full object-cover border-2 border-primary/20">
+  <span class="hidden md:inline text-sm font-medium">张同学</span>
+</button>
+</div>
+
   </nav>
 
   <!-- 主内容区 -->
@@ -132,7 +135,7 @@
       </div>
 
       <!-- 问题列表 -->
-      <div class="space-y-4">
+      <div id="list" class="space-y-4">
         <!-- 问题卡片1 -->
         <div class="question-card">
           <div class="flex items-start justify-between">
@@ -266,8 +269,13 @@
   </div>
 
   <!-- 浮动提问按钮 -->
-  <button class="fixed bottom-20 right-6 md:bottom-6 md:right-6 w-14 h-14 bg-primary rounded-full shadow-lg flex items-center justify-center text-white text-xl hover:bg-secondary transition-all transform hover:scale-110 z-40">
-    <i class="fa fa-plus"></i>
-  </button>
+<!-- 右下角 + 号 -->
+<button id="fabAsk" class="fixed bottom-20 right-6 md:bottom-6 md:right-6 w-14 h-14 bg-primary rounded-full shadow-lg flex items-center justify-center text-white text-xl hover:bg-secondary transition-all transform hover:scale-110 z-40">
+  <i class="fa fa-plus"></i>
+</button>
+
+<script type="module" src="../src/router.js"></script>
+<script type="module" src="../src/home.js"></script>
+
 </body>
 </html>
